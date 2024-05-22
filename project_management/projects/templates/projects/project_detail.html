@@ -2,30 +2,30 @@
 {% load custom_filters %}
 
 {% block content %}
-  <div class="card">
+<div class="card">
     <div class="card-body">
-      <h2 class="card-title">{{ project.name }}</h2>
-      <p class="card-text">{{ project.description }}</p>
+        <h2 class="card-title">{{ project.name }}</h2>
+        <p class="card-text">{{ project.description }}</p>
     </div>
-  </div>
-  <div class="card mt-3">
+</div>
+<div class="card mt-3">
     <div class="card-body">
-      <h3 class="card-title">Tasks</h3>
-      <ul class="list-group">
-        {% for task in tasks %}
-          <li class="list-group-item d-flex justify-content-between align-items-center">
-            <div>
-              <strong><a href="{% url 'task_detail' task.id %}">{{ task.name }}</a></strong> - {{ task.description }}
-            </div>
-            <div>
-              <span class="badge badge-{{ task.status|status_class }}">{{ task.get_status_display }}</span>
-              <span class="badge badge-secondary">Due: {{ task.due_date }}</span>
-            </div>
-          </li>
-        {% empty %}
-          <li class="list-group-item">There are no tasks for this project.</li>
-        {% endfor %}
-      </ul>
+        <h3 class="card-title">Tasks</h3>
+        <ul class="list-group">
+            {% for task in tasks %}
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                <div>
+                    <strong><a href="{% url 'task_detail' task.id %}">{{ task.name }}</a></strong> - {{ task.description }}
+                </div>
+                <div>
+                    <span class="badge badge-{{ task.status|status_class }}">{{ task.get_status_display }}</span>
+                    <span class="badge badge-secondary">Due: {{ task.due_date }}</span>
+                </div>
+            </li>
+            {% empty %}
+            <li class="list-group-item">There are no tasks for this project.</li>
+            {% endfor %}
+        </ul>
     </div>
-  </div>
+</div>
 {% endblock %}

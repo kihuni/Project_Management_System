@@ -2,98 +2,98 @@
 {% load custom_filters %}
 
 {% block content %}
-  <h2>Profile</h2>
-  <div class="row">
+<h2>Profile</h2>
+<div class="row">
     <!-- Projects Section -->
     <div class="col-md-6">
-      <div class="card mb-3">
-        <div class="card-body">
-          <h3 class="card-title">Your Projects</h3>
-          <ul class="list-group">
-            {% for project in projects %}
-              <li class="list-group-item d-flex justify-content-between align-items-center">
-                <a href="{% url 'project_detail' project.id %}">{{ project.name }}</a>
-                <div>
-                  <a href="{% url 'edit_project' project.id %}" class="btn btn-sm btn-outline-primary">Edit</a>
-                  <form action="{% url 'delete_project' project.id %}" method="post" style="display:inline;">
-                    {% csrf_token %}
-                    <button type="submit" class="btn btn-sm btn-outline-danger">Delete</button>
-                  </form>
-                </div>
-              </li>
-            {% empty %}
-              <li class="list-group-item">You have no projects.</li>
-            {% endfor %}
-          </ul>
-          <a href="{% url 'create_project' %}" class="btn btn-primary mt-3">Create New Project</a>
+        <div class="card mb-3">
+            <div class="card-body">
+                <h3 class="card-title">Your Projects</h3>
+                <ul class="list-group">
+                    {% for project in projects %}
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <a href="{% url 'project_detail' project.id %}">{{ project.name }}</a>
+                        <div>
+                            <a href="{% url 'edit_project' project.id %}" class="btn btn-sm btn-outline-primary">Edit</a>
+                            <form action="{% url 'delete_project' project.id %}" method="post" style="display:inline;">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-sm btn-outline-danger">Delete</button>
+                            </form>
+                        </div>
+                    </li>
+                    {% empty %}
+                    <li class="list-group-item">You have no projects.</li>
+                    {% endfor %}
+                </ul>
+                <a href="{% url 'create_project' %}" class="btn btn-primary mt-3">Create New Project</a>
+            </div>
         </div>
-      </div>
     </div>
     <!-- Tasks Section -->
     <div class="col-md-6">
-      <div class="card mb-3">
-        <div class="card-body">
-          <h3 class="card-title">Your Tasks</h3>
-          <ul class="list-group">
-            {% for task in tasks %}
-              <li class="list-group-item d-flex justify-content-between align-items-center">
-                <div>
-                  <strong><a href="{% url 'task_detail' task.id %}">{{ task.name }}</a></strong> - {{ task.description }}
-                  <br>
-                  <span class="badge badge-{{ task.status|status_class }}">{{ task.get_status_display }}</span>
-                  <span class="badge badge-secondary">Due: {{ task.due_date }}</span>
-                  <span class="badge badge-{{ task.priority }}">{{ task.get_priority_display }}</span>
-                </div>
-                <div>
-                  <a href="{% url 'edit_task' task.id %}" class="btn btn-sm btn-outline-primary">Edit</a>
-                  <form action="{% url 'delete_task' task.id %}" method="post" style="display:inline;">
-                    {% csrf_token %}
-                    <button type="submit" class="btn btn-sm btn-outline-danger">Delete</button>
-                  </form>
-                </div>
-              </li>
-            {% empty %}
-              <li class="list-group-item">You have no tasks.</li>
-            {% endfor %}
-          </ul>
-          <a href="{% url 'create_task' %}" class="btn btn-primary mt-3">Create New Task</a>
+        <div class="card mb-3">
+            <div class="card-body">
+                <h3 class="card-title">Your Tasks</h3>
+                <ul class="list-group">
+                    {% for task in tasks %}
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <div>
+                            <strong><a href="{% url 'task_detail' task.id %}">{{ task.name }}</a></strong> - {{ task.description }}
+                            <br>
+                            <span class="badge badge-{{ task.status|status_class }}">{{ task.get_status_display }}</span>
+                            <span class="badge badge-secondary">Due: {{ task.due_date }}</span>
+                            <span class="badge badge-{{ task.priority }}">{{ task.get_priority_display }}</span>
+                        </div>
+                        <div>
+                            <a href="{% url 'edit_task' task.id %}" class="btn btn-sm btn-outline-primary">Edit</a>
+                            <form action="{% url 'delete_task' task.id %}" method="post" style="display:inline;">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-sm btn-outline-danger">Delete</button>
+                            </form>
+                        </div>
+                    </li>
+                    {% empty %}
+                    <li class="list-group-item">You have no tasks.</li>
+                    {% endfor %}
+                </ul>
+                <a href="{% url 'create_task' %}" class="btn btn-primary mt-3">Create New Task</a>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
+</div>
 
-  <!-- Completed Tasks Section -->
-  <div class="card mb-3">
+<!-- Completed Tasks Section -->
+<div class="card mb-3">
     <div class="card-body">
-      <h3 class="card-title">Completed Tasks</h3>
-      <ul class="list-group">
-        {% for task in completed_tasks %}
-          <li class="list-group-item">
-            <strong>{{ task.name }}</strong> - {{ task.description }}
-            <span class="badge badge-success">{{ task.get_status_display }}</span>
-          </li>
-        {% empty %}
-          <li class="list-group-item">You have no completed tasks.</li>
-        {% endfor %}
-      </ul>
+        <h3 class="card-title">Completed Tasks</h3>
+        <ul class="list-group">
+            {% for task in completed_tasks %}
+            <li class="list-group-item">
+                <strong>{{ task.name }}</strong> - {{ task.description }}
+                <span class="badge badge-success">{{ task.get_status_display }}</span>
+            </li>
+            {% empty %}
+            <li class="list-group-item">You have no completed tasks.</li>
+            {% endfor %}
+        </ul>
     </div>
-  </div>
+</div>
 
-  <!-- Due Soon Tasks Section -->
-  <div class="card mb-3">
+<!-- Due Soon Tasks Section -->
+<div class="card mb-3">
     <div class="card-body">
-      <h3 class="card-title">Tasks Due Soon</h3>
-      <ul class="list-group">
-        {% for task in due_soon_tasks %}
-          <li class="list-group-item">
-            <strong>{{ task.name }}</strong> - {{ task.description }}
-            <span class="badge badge-warning">Due: {{ task.due_date }}</span>
-            <span class="badge badge-{{ task.priority }}">{{ task.get_priority_display }}</span>
-          </li>
-        {% empty %}
-          <li class="list-group-item">You have no tasks due soon.</li>
-        {% endfor %}
-      </ul>
+        <h3 class="card-title">Tasks Due Soon</h3>
+        <ul class="list-group">
+            {% for task in due_soon_tasks %}
+            <li class="list-group-item">
+                <strong>{{ task.name }}</strong> - {{ task.description }}
+                <span class="badge badge-warning">Due: {{ task.due_date }}</span>
+                <span class="badge badge-{{ task.priority }}">{{ task.get_priority_display }}</span>
+            </li>
+            {% empty %}
+            <li class="list-group-item">You have no tasks due soon.</li>
+            {% endfor %}
+        </ul>
     </div>
-  </div>
+</div>
 {% endblock %}

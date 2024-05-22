@@ -5,4 +5,3 @@ typing_extensions==4.11.0
 gunicorn
 django-crispy-forms
 crispy-bootstrap4
-Python 3.10.12
